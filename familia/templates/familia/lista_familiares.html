@@ -4,17 +4,22 @@
 
 {% block cuerpo %}
 <div class="container">    
-  
-  <div class="row">
+  <a class="m-4" href="/">Refrescar Página</a>
+  <div class="row m-3">
     <div class="col">
-      {% url 'agregar' as agregar_url %}
+      {% url 'agregar_familiar' as agregar_url %}
       {% url 'buscar' as buscar_url %}
-      {% bootstrap_button "Agregar" button_class="btn-success" button_type="link" href=agregar_url %} 
+      {% url 'agregar_mascota_gato' as agregar_mascota_gato_url %}
+      {% url 'agregar_mascota_perro' as agregar_mascota_perro_url %}
+      {% bootstrap_button "Agregar familiar" button_class="btn-success" button_type="link" href=agregar_url %} 
+      {% bootstrap_button "Agregar mascota GATO" button_class="btn-success" button_type="link" href=agregar_mascota_gato_url %}
+      {% bootstrap_button "Agregar mascota PERRO" button_class="btn-success" button_type="link" href=agregar_mascota_perro_url %}
       {% bootstrap_button "Buscar" button_class="btn-success" button_type="link" href=buscar_url %}  
     <div>
   <div>
 
-  <div class="row">
+  <div class="row m-3">
+    <h2>Familiares</h2>
     <div class="col">
         {% if personas %}
         <table class="table">
@@ -48,5 +53,72 @@
         {% endif %}
     </div>
   </div>
+  <h2 class="m-1">Mascotas:</h2>
+  <div class="row m-3">
+    <h3>Gatos</h3>
+    <div class="col">
+        {% if gatos %}
+        <table class="table">
+            <thead>
+                <th scope="col">Identificador</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de adopción</th>
+                <th scope="col">Color de pelaje</th>
+                <th scope="col">Acciones</th>
+            </thead>
+        
+            {% for g in gatos %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{g.id}} </th>
+                    <td> {{g.nombre}} </td>
+                    <td> {{g.fecha_adopcion}} </td>
+                    <td> {{g.color_pelaje}} </td>
+                    {% url 'borrar' identificador=p.id as borrar_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
+                </tr>  
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p class="p-2">No tienes mascotas GATO cargadas</p>
+        {% endif %}
+    </div>
+  </div>
+
+  <div class="row m-3">
+    <h3>Perros</h3>
+    <div class="col">
+        {% if perros %}
+        <table class="table">
+            <thead>
+                <th scope="col">Identificador</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de adopción</th>
+                <th scope="col">Raza</th>
+                <th scope="col">Acciones</th>
+            </thead>
+        
+            {% for d in perros %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{d.id}} </th>
+                    <td> {{d.nombre}} </td>
+                    <td> {{d.fecha_adopcion}} </td>
+                    <td> {{d.raza}} </td>
+                    {% url 'borrar' identificador=p.id as borrar_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
+                </tr>  
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p class="p-2">No tienes mascotas PERRO cargadas</p>
+        {% endif %}
+    </div>
+  </div>
+
+
+
 </div>
 {% endblock %}

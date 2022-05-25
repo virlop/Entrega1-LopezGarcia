@@ -4,15 +4,14 @@
 
 {% block cuerpo %}
 <div class="container">
-  <a class="m-4" href="{%url  'agregar' %}">Refrescar Página</a>
-  <div class="row mt-3">
+  <div class="row">
     <div class="col">
-      <h1>CARGAR UN FAMILIAR</h1>
+      <h1>CARGAR MASCOTA GATO</h1>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <form action="{% url  'agregar_familiar'%}" method="post">
+      <form action="{% url  'agregar_mascota_gato' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button "Guardar" button_type="submit" button_class="btn-primary" %}
@@ -20,4 +19,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}

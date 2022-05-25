@@ -1,24 +1,25 @@
+from urllib import request
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import render
-from familia.forms import PersonaForm, BuscarPersonasForm
-
-from familia.models import Persona
+from familia.forms import PersonaForm, BuscarPersonasForm, PerroForm, GatoForm
+from familia.models import Persona, Mascota, Gato, Perro
 
 def index(request):
     personas = Persona.objects.all()
+    gatos = Gato.objects.all()
+    perros = Perro.objects.all()
     template = loader.get_template('familia/lista_familiares.html')
     context = {
         'personas': personas,
+        'gatos' : gatos,
+        'perros' : perros
     }
     return HttpResponse(template.render(context, request))
 
 
-def agregar(request):
-    '''
-    TODO: agregar un mensaje en el template index.html que avise al usuario que 
-    la persona fue cargada con éxito
-    '''
+
+def agregar_familiar(request):
 
     if request.method == "POST":
         form = PersonaForm(request.POST)
@@ -40,25 +41,49 @@ def agregar(request):
     
     return render(request, 'familia/form_carga.html', {'form': form})
 
+def agregar_mascota_gato(request):
+    if request.method == "POST":
+        form = GatoForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            fecha_adopcion = form.cleaned_data['fecha_adopcion'] 
+            color_pelaje = form.cleaned_data['color_pelaje']
+            Gato(nombre = nombre, fecha_adopcion = fecha_adopcion, color_pelaje = color_pelaje).save()
+            return HttpResponseRedirect("/")
+        
+    elif request.method == "GET":
+        form = GatoForm()
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+    return render(request, 'familia/form_carga_gato.html', {'form': form})
+
+def agregar_mascota_perro(request):
+    if request.method == "POST":
+        form = PerroForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            fecha_adopcion = form.cleaned_data['fecha_adopcion'] 
+            raza = form.cleaned_data['raza']
+            Perro(nombre = nombre, fecha_adopcion = fecha_adopcion, raza = raza).save()
+            return HttpResponseRedirect("/")
+        
+    elif request.method == "GET":
+        form = PerroForm()
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+    return render(request, 'familia/form_carga_perro.html', {'form': form})
 
 def borrar(request, identificador):
-    '''
-    TODO: agregar un mensaje en el template index.html que avise al usuario que 
-    la persona fue eliminada con éxito        
-    '''
     if request.method == "GET":
         persona = Persona.objects.filter(id=int(identificador)).first()
         if persona:
             persona.delete()
-        return HttpResponseRedirect("/familia/")
+        return HttpResponseRedirect("/")
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
 
 def actualizar(request, identificador):
-    '''
-    TODO: implementar una vista para actualización
-    '''
     pass
 
 
