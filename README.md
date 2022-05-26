@@ -1,92 +1,24 @@
-# Mi Primer MVT Django
+# Primera entrega Proyecto Final
 
-Ejemplo de MVT para la clase de Coder House python, este codigo contiene:
+Este codigo contiene:
  - Vistas 
  - Formularios
  - Modelos
  - Templates
 
-**importnante: Este ejemplo fue probado con python 3.8.13 y Django 4.0.4**
+**importante: Este ejemplo fue probado con python 3.8.13 y Django 4.0.4, usando Bootstrap v5**
 
-## Checkear que tengas Python
-
-Para comenzar primero tienen que asegurarse que tienen instalado, python.
-
-En windows tiene que abrir una terminal cmd o powershell.
-
-```PS
-PS C:\> python --version
-Python 3.X.X 
+Primero correr el servidor con los siguientes comandos:
 ```
-
-En Linux/Mac tiene que abrir una terminal bash
-
-```bash
-$ python --version
-Python 3.X.X 
-```
-
-Si les aparece la versión todo OK pueden seguir. Caso contrario descarguen python desde este [link](https://www.python.org/downloads/).
-
-## Instalar django
-
-En una terminal cmd o powershell desde windows:
-
-```PS
-C:\> pip install django
-```
-
-Linux/Mac:
-
-```bash
-$ pip install django
-```
-
-Si no arrojo errores esto es suficiente para poder correr el projecto.
-
-
-# Instalar django bootstrap v5
-
-```PS
-C:\> pip install django-bootstrap-v5
-```
-
-Linux/Mac:
-
-```bash
-$ pip install django-bootstrap-v5
-```
-## Clonar el projecto con git
-
-windows:
-
-```PS
-C:\> git clone https://github.com/martinezger/mi-primer-mvt.git
-```
-
-Linux/Mac:
-```bash
-$ git clone https://github.com/martinezger/mi-primer-mvt.git
-```
-
-## Correr el Servidor
-
-Los siguinetes comandos son analogos en Mac/Linux/Windows:
-
-```bash
 cd mi-primer-mvt
-python manage.py migrate
+python3 manage.py migrate
 ```
-La consola mostrara las migraciones de la base de datos que se realizaron.
-
-Luego arrancamos el servidor web
-
-```bash
-python manage.py runserver
 ```
-Listo ya tenes corriendo el ejemplo.
+python3 manage.py runserver
+```
+## Funcionalidades
 
-ahora Hace click en el siguiente link para ver el ejemplo corriendo: 
-
-[http://localhost:8000/](http://localhost:8000/)
-
+Este código tiene 4 modelos: Persona, Mascota, Perro y Gato. Los últimos dos heredan de Mascota.
+En el inicio se muestra la lista de Familiares (Persona) y de Mascotas (Gatos y Perros) cargados en la DB. Se puede eliminar cualquiera de ellos con el botón "Borrar". También se muestran los botones "Agregar Familiar", "Agregar mascota GATO" y "Agregar mascota PERRO" para cargar los correspondientes objetos en la DB. Para ello se debe completar el formulario correspondiente y hacer click en "Guardar".
+El botón "Refrescar página" sirve para actualizar la página. Se encuentra en todos los templates.
+El header y el footer tienen un link que lleva al inicio. También se encuentra en todos los templates.
