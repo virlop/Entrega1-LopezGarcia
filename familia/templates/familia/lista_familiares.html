@@ -42,8 +42,8 @@
                     <td> {{p.email}} </td>
                     <td> {{p.fecha_nacimiento}} </td>
                     <td> {{p.altura}} m</td>
-                    {% url 'borrar' identificador=p.id as borrar_url %}
-                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
+                    {% url 'borrar_familiar' identificador=p.id as borrar_familiar_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_familiar_url %}</td>
                 </tr>  
             </tbody>
             {% endfor %}
@@ -74,8 +74,8 @@
                     <td> {{g.nombre}} </td>
                     <td> {{g.fecha_adopcion}} </td>
                     <td> {{g.color_pelaje}} </td>
-                    {% url 'borrar' identificador=p.id as borrar_url %}
-                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
+                    {% url 'borrar_gato' identificador=g.id as borrar_gato_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_gato_url %}</td>
                 </tr>  
             </tbody>
             {% endfor %}
@@ -106,8 +106,8 @@
                     <td> {{d.nombre}} </td>
                     <td> {{d.fecha_adopcion}} </td>
                     <td> {{d.raza}} </td>
-                    {% url 'borrar' identificador=p.id as borrar_url %}
-                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_url %}</td>
+                    {% url 'borrar_perro' identificador=d.id as borrar_perro_url %}
+                    <td>{% bootstrap_button "Borrar" size="sm" button_class="btn-danger" button_type="link" href=borrar_perro_url %}</td>
                 </tr>  
             </tbody>
             {% endfor %}

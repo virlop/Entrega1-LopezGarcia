@@ -73,7 +73,7 @@ def agregar_mascota_perro(request):
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
     return render(request, 'familia/form_carga_perro.html', {'form': form})
 
-def borrar(request, identificador):
+def borrar_familiar(request, identificador):
     if request.method == "GET":
         persona = Persona.objects.filter(id=int(identificador)).first()
         if persona:
@@ -82,9 +82,24 @@ def borrar(request, identificador):
     else:
         return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
+def borrar_gato(request, identificador):
+    if request.method == "GET":
+        gato = Gato.objects.filter(id=int(identificador)).first()
+        if gato:
+            gato.delete()
+        return HttpResponseRedirect("/")
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
 
-def actualizar(request, identificador):
-    pass
+def borrar_perro(request, identificador):
+    if request.method == "GET":
+        perro = Perro.objects.filter(id=int(identificador)).first()
+        if perro:
+            perro.delete()
+        return HttpResponseRedirect("/")
+    else:
+        return HttpResponseBadRequest("Error no conzco ese metodo para esta request")
+
 
 
 def buscar(request):
